@@ -19,20 +19,21 @@ class VentLine
     x_values = @from.x.step(@to.x, @from.x <= @to.x ? 1 : -1).to_a
     y_values = @from.y.step(@to.y, @from.y <= @to.y ? 1 : -1).to_a
 
-    coordinate_array = x_values.product(y_values)
-
     if is_diagonal?
-      diagonal_coordinates(coordinate_array, x_values.size)
+      diagonal_coordinates(x_values, y_values)
     else
-      coordinate_array
+      straight_coordinates(x_values, y_values)
     end
   end
 
   private
 
-  def diagonal_coordinates(coordinate_array, count)
-    coordinate_grid = coordinate_array.each_slice(count).to_a
-    (0...count).collect { |i| coordinate_grid[i][i] }
+  def straight_coordinates(x_values, y_values)
+    x_values.product(y_values)
+  end
+
+  def diagonal_coordinates(x_values, y_values)
+    (0...(x_values.size)).collect { |i| [x_values[i], y_values[i]] }
   end
 end
 
