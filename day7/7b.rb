@@ -1,7 +1,7 @@
 def average(array)
   sum = array.sum(0.0)
   size = array.size
-  (sum / size).round
+  (sum / size)
 end
 
 def sum_of_natural_numbers(last)
@@ -10,7 +10,7 @@ end
 
 positions = File.open("7.txt", &:readline).split(",").map(&:to_i)
 average = average(positions)
-possibilities = [average - 1, average, average + 1]
+possibilities = [average.floor, average.ceil]
 
 total_fuels = possibilities.map do |average|
   positions.map do |position|
